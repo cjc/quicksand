@@ -75,8 +75,10 @@ Github site: http://github.com/razorjack/quicksand
                     // hack: 
                     // used to be: $sourceParent.html($dest.html()); // put target HTML into visible source container
                     // but new webkit builds cause flickering when replacing the collections
-                    $toDelete = $sourceParent.find('> *');
-                    $sourceParent.prepend($dest.find('> *'));
+                    // Switch from .find('> *') to .contents() to conserve whitespace nodes if they are present, for 
+                    // inline-block whitespace continuity and to clean up previous whitespace
+                    $toDelete = $sourceParent.contents();
+                    $sourceParent.prepend($dest.contents());
                     $toDelete.remove();
                          
                     if (adjustHeightOnCallback) {
@@ -153,7 +155,16 @@ Github site: http://github.com/razorjack/quicksand
             rawDest.setAttribute('id', '');
             rawDest.style.height = 'auto';
             rawDest.style.width = $sourceParent.width() + 'px';
-            $dest.append($collection);      
+            $dest.append($collection);
+            // Detect whitespace nodes in sourceParent.contents(), if present add whitespace to $dest (display: inline-block compatibility)
+            var whitespacecount = 0;
+            jQuery.each($sourceParent.contents(), function(i, value) {
+              if (value && value.nodeType == 3) whitespacecount += 1; 
+            });
+            console.log(whitespacecount);
+            if (whitespacecount > 0) {
+              $dest.children().after(' ');
+            }
             // insert node into HTML
             // Note that the node is under visible source container in the exactly same position
             // The browser render all the items without showing them (opacity: 0.0)
