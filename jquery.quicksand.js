@@ -81,12 +81,8 @@ Github site: http://github.com/razorjack/quicksand
                     $sourceParent.prepend($dest.contents());
                     $toDelete.remove();
                          
-                    if (adjustHeightOnCallback) {
-                        $sourceParent.css('height', destHeight);
-                    } else {
-                        // if no specific height supplied for oncallback, clear the height from $sourceParent (to prevent restricting the height in responsive pages)
-                        $sourceParent.css('height','');
-                    }
+                    // clear the height from $sourceParent (to prevent restricting the height in responsive pages)
+                    $sourceParent.css('height','');
                     options.enhancement($sourceParent); // Perform custom visual enhancements on a newly replaced collection
                     if (typeof callbackFunction == 'function') {
                         callbackFunction.call(this);
