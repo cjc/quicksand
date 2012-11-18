@@ -4,6 +4,10 @@ jQuery plugin for reordering and filtering items with a nice shuffling animation
 
 Project site: "http://razorjack.net/quicksand":http://razorjack.net/quicksand. 
 
+h2. Fork Feature - Display Inline-Block Compatibility
+
+With the original Quicksand, if you used it on anything inline or inline-block and there was whitespace between elements, then the new version after the quicksand operation would not have that whitespace which impacts the position of elements. This fork detects existing whitespace (fairly crudely) and if present it adds whitespace between the elements in the newly reconstructed DOM.
+
 h2. Demos & docs
 
 Please visit "the project site":http://razorjack.net/quicksand for live demos & documentation.
