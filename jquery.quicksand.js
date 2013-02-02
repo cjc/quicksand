@@ -160,7 +160,6 @@ Github site: http://github.com/razorjack/quicksand
             jQuery.each($sourceParent.contents(), function(i, value) {
               if (value && value.nodeType == 3) whitespacecount += 1; 
             });
-            console.log(whitespacecount);
             if (whitespacecount > 0) {
               $dest.children().after(' ');
             }
